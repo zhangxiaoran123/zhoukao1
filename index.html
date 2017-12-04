@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <script>
+        document.documentElement.style.fontSize = window.innerWidth / 375 *50 + 'px';
+    </script>
+</head>
+<body ng-controller="main">
+    <div class="wrap">
+        <div class="head">
+            <span></span>
+            <span>公司</span>
+            <span><i class="icon iconfont icon-fangdajing"></i></span>
+        </div>
+        <div class="nav">
+            <span>融资<i class="icon iconfont icon-angle-down"></i></span>
+            <span>规模<i class="icon iconfont icon-angle-down"></i></span>
+            <span>行业<i class="icon iconfont icon-angle-down"></i></span>
+        </div>
+        <div class="contents">
+            <dl ng-repeat="val in data">
+                <dt><img src="{{val.img}}" alt=""></dt>
+                <dd>
+                    <h1>{{val.tit}}</h1>
+                    <p>{{val.h}}</p>
+                    <p class="ss">{{val.content}}</p>
+                    <p>{{val.foo}} <span>{{val.case}}</span> {{val.w}}</p>
+                </dd>
+            </dl>
+        </div>
+        <div class="footer">
+            <ul>
+                <li>
+                    <i class="icon iconfont icon-tengxunweibo1"></i>
+                    <span>职位</span>
+                </li>
+                <li>
+                    <i class="icon iconfont icon-11"></i>
+                    <span>公司</span>
+                </li>
+                <li>
+                    <i class="icon iconfont icon-xiaoxi1"></i>
+                    <span>消息</span>
+                </li>
+                <li>
+                    <i class="icon iconfont icon-wode-xuanzhong"></i>
+                    <span>我的</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./js/angular.js"></script>
+<script>
+       angular.module('app',[])
+       .controller('main',['$scope', '$http', function ($scope,$http) {
+            $http({
+                url:'http://localhost:3000'
+            })
+            .then(function (result) {
+               $scope.data = result.data;
+            }, function(error) {
+                console.log(error)
+            })
+       }])
+</script>
